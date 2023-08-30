@@ -1,16 +1,17 @@
-// Import methods to save and get data from the indexedDB database in './database.js'
+//imported getDb and putDb from database.js, and header from header.js
 import { getDb, putDb } from './database';
 import { header } from './header';
 
 export default class {
   constructor() {
+    //saves content from local storage as localData
     const localData = localStorage.getItem('content');
 
-    // check if CodeMirror is loaded
     if (typeof CodeMirror === 'undefined') {
       throw new Error('CodeMirror is not loaded');
     }
 
+    //
     this.editor = CodeMirror(document.querySelector('#main'), {
       value: '',
       mode: 'javascript',
@@ -22,18 +23,21 @@ export default class {
       tabSize: 2,
     });
 
-    // When the editor is ready, set the value to whatever is stored in indexeddb.
-    // Fall back to localStorage if nothing is stored in indexeddb, and if neither is available, set the value to header.
+    //The value of this.editor is set to either data, localData, or header, depending on what's available. 
+    //If data is available, the value will be set to the value of data. If data is not available, 
+    //the value will be set to the value oflocalData. 
+    //If localData is not available, the value will be set to the value of header. 
     getDb().then((data) => {
       console.info('Loaded data from IndexedDB, injecting into editor');
       this.editor.setValue(data || localData || header);
     });
 
+    //Whenever a change is made to the editor, 'content' of local storage will be set to the value of this.editor
     this.editor.on('change', () => {
       localStorage.setItem('content', this.editor.getValue());
     });
 
-    // Save the content of the editor when the editor itself is loses focus
+    //Whenever the editor "blurs", local storage will be set to the current value of this.editor. Like a backup. 
     this.editor.on('blur', () => {
       console.log('The editor has lost focus');
       putDb(localStorage.getItem('content'));
