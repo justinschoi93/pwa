@@ -40,9 +40,15 @@ A Progressive Web Application Challenge
 
 ## Learning Points
     
+    This challenge was a great opportunity to practice working with webpack and it's plugins. They allowed us to register customized service workers, create manifests as well as convert our js, css and html files into minified, yet still fully functional versions of themselves. 
+
+    Not only that, thanks to Webpack's PWA Manifest plugin, we were also able to provide users with the option of installing/downloading the application to their local machines, for offline use. 
+
+    And althought not as apparent, working on this project was also a great opportunity to practice working with both local storage, and indexedDB, the conccurent use of which greatly improved the reliability of our app. 
+    
 ## The Code
 ![the code](./assets/screenshot1.jpg)
-![Check out the Walk-through video!](./assets/walkthrough.webm) OR (https://drive.google.com/file/d/178bLwdrl74Wai2S7Pw9Ns_mT1F3tHyLv/view)
+![Check out the App on Heroku!](https://fierce-tor-72080-53a54ade824e.herokuapp.com/)
 
 ## Credits
 * [LinkedIn](https://linkedin.com/in/justinchoica)
